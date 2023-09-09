@@ -3,10 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Models\Categories;
-use App\Models\Category;
 use App\Models\Products;
-use App\Models\User;
-use App\Models\Vehicle;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +45,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
         'description' => 'Café mezcla seleccionada de Arábica y Robusta',
         'image_path' => 'espresso.jpg',
    ]);
+
    $category = Categories::create(['name' => 'Pasteleria']);
    $product = Products::create([
         'category_id' => $category->id,
@@ -56,15 +54,18 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
         'description' => 'Si deseas probar un nuevo sabor y sorprender, esta torta de amapola es una real alternativa, se prepara en base a bizcocho con amapola, crema chantilly mezclada con manjar y trozos de nueces.',
         'image_path' => 'amapola.jpg',
     ]);
+
     $category = Categories::create(['name' => 'Sandwich']);
     $product = Products::create([
         'category_id' => $category->id,
         'name' => 'Jamón Pierna',
         'price' => 6800,
-       -- 'description' => 'Pan Italiano (9x18cm) - Miga Blanco o Miga Integral (13x11cm).',
+        'description' => 'Pan Italiano (9x18cm) - Miga Blanco o Miga Integral (13x11cm).',
         'image_path' => 'jamon.jpg',
-     ]);
- */
+     ]); */
+
+    ////// descomentar lo de arriba para ingresar los datos
+
 Route::get('/', function () {
     return view('welcome');
 });

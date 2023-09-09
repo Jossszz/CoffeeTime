@@ -28,8 +28,6 @@ class AuthController extends Controller
         }
     }
 
-
-
     public function showRegister(){
         return View('auth.register');
     }
