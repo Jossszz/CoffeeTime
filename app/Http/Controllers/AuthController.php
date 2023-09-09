@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -23,9 +24,11 @@ class AuthController extends Controller
             $user = Auth::user();
             return redirect()->route('home')->with('user', $user);
         }else{
-            return redirect()->back()->withErrors(['error' => 'Credenciales incorrectas']);
+            return redirect()->back()->withErrors(['error' => 'Correo o Contraseña incorrectas']);
         }
     }
+
+
 
     public function showRegister(){
         return View('auth.register');
@@ -35,10 +38,18 @@ class AuthController extends Controller
         return View('auth.landing');
     }
 
+    function menuUser(){
+        if(Auth::check()){
+            $user = Auth::user();
+            Session::put('name', $user->name);
+            $categories = Categories::with('products')->get();
+            return view('admin.menuUser', ['categories' => $categories], ['name' => $user->name]);
+        }
+    }
+
     public function menu(){
         $categories = Categories::with('products')->get();
         return view('auth.menu', ['categories' => $categories]);
-        //return View('auth.menu');
     }
 
     public function categories()
@@ -67,4 +78,5 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
 }
